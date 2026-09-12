@@ -35,8 +35,6 @@ En este laboratorio el objetivo era dejar lista una instancia de notebook de Sag
 
 ### Pasos y capturas
 
-> 🔲 **PENDIENTE:** agrega una captura por cada uno de estos momentos (puedes usar la carpeta `evidencias/lab-3.1/`):
->
 > - [Configuración de la instancia de notebook](evidencias/lab3-1/mynotebook.png)
 > - [Instancia en estado `InService`](evidencias/lab3-1/mynotebook.png)
 > - [PythonCheatSheet.ipynb](evidencias/lab3-1/PythonCheatSheet.ipynb)
