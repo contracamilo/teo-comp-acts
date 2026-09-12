@@ -1,9 +1,9 @@
 # Laboratorios en AWS academy
 
-**Actividad 4 – Laboratorio en AWS**
-**Estudiante:** Camilo Rivera Quintero
-**Docente:** Rodrigo Fernandez Aranda
-**Curso:** Teoría de la Computación 2 - Virtual
+- **Actividad 4 – Laboratorio en AWS**
+- **Estudiante:** Camilo Rivera Quintero
+- **Docente:** Rodrigo Fernandez Aranda
+- **Curso:** Teoría de la Computación 2 - Virtual
 
 ## Sobre esta actividad
 
