@@ -85,4 +85,4 @@ Usé el mismo dataset de la columna vertebral, el escenario es que trabajamos pa
 
 ### Commits de esta tarea
 
-> - `chore: evidence from lab 3-2` ()
+> - `chore: evidence from lab 3-2` ([`53e0ea7`](../../commit/53e0ea7))
