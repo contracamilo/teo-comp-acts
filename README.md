@@ -17,7 +17,7 @@ Este repositorio reúne la evidencia de los tres laboratorios guiados de Amazon 
 
 ## 🔑 Evidencia de acceso a la plataforma de laboratorio
 
-![Acceso a la plataforma](acceso.png)
+![Acceso a la plataforma](evidencias/lab3-1/acceso.png)
 
 ---
 
