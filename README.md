@@ -81,8 +81,66 @@ Usé el mismo dataset de la columna vertebral, el escenario es que trabajamos pa
 ### Resultado final de la tarea
 
 >
-> [Resultado Lab 3.2](evidencias/lab3-2/success.pngg)
+> ![Resultado Lab 3.2](evidencias/lab3-2/success.png)
 
 ### Commits de esta tarea
 
 > - `chore: evidence from lab 3-2` ([`53e0ea7`](../../commit/53e0ea7))
+
+---
+
+## 🧪 Laboratorio 3.3 – Codificación de datos categóricos
+
+### ¿Qué hice y por qué?
+
+Para este lab trabajé con el **dataset de automóviles** (`imports-85.csv`) del repositorio de UC Irvine, que tiene 25 columnas mezclando valores numéricos y de texto. Partimos de que un modelo de machine learning solo entiende números, así que hay que convertir las columnas de texto a una forma numérica, pero sin inventarles una relación que no tienen.
+
+1. **Volví a mi instancia** `MyNotebook` desde SageMaker (Applications and IDEs → Notebooks → Open JupyterLab) — se reutiliza durante todo el módulo, no hay que crear una nueva cada vez.
+2. **Cargué el dataset** con `pd.read_csv`, indicando manualmente los nombres de columna (`col_names`) porque el CSV no trae encabezado, y revisé su forma (205 filas × 25 columnas), las primeras filas (`head()`) y los tipos de dato (`info()`).
+3. **Detecté datos faltantes antes de seguir.** El `info()` mostró que 7 de las 25 columnas tienen valores nulos (marcados como `?` en el archivo original y convertidos a `NaN` al cargar):
+
+   | Columna | Faltantes |
+   |---|---|
+   | `normalized-losses` | 41 |
+   | `bore`, `stroke`, `price` | 4 cada una |
+   | `num-of-doors`, `horsepower`, `peak-rpm` | 2 cada una |
+
+4. **Recorté el dataset a cuatro columnas** (`aspiration`, `num-of-doors`, `drive-wheels`, `num-of-cylinders`) para el ejercicio de codificación. De estas cuatro, solo `num-of-doors` tenía datos faltantes (2 de 205 filas); las otras tres estaban completas.
+5. **Codifiqué las dos columnas ordinales** con un mapeador (diccionario) y `replace()`:
+   - `num-of-doors` (*two*: 89, *four*: 114) → columna `doors`, con `{"two": 2, "four": 4}`.
+   - `num-of-cylinders` (*four*: 159, *six*: 24, *five*: 11, *eight*: 5, *two*: 4, *twelve*: 1, *three*: 1) → columna `cylinders`, con el mapeador completo de las 7 categorías.
+
+   Tiene sentido usar números ordenados aquí porque estas categorías sí tienen una relación numérica real: dos puertas es menos que cuatro, dos cilindros es menos que doce. Un detalle que noté: como `num-of-doors` tenía 2 valores `NaN`, la columna `doors` resultante quedó como `float64` (se ve `2.0`/`4.0` en vez de enteros limpios) — eso es una pista de que `replace()` no "arregla" los datos faltantes, solo convierte los valores que sí están en el diccionario; el `NaN` original sigue ahí. Codificar y limpiar datos faltantes son dos tareas distintas.
+6. **Codifiqué las dos columnas no ordinales** con `pd.get_dummies` (One-Hot Encoding):
+   - `drive-wheels` (*4wd*, *fwd*, *rwd*) → tres columnas nuevas (`drive-wheels_4wd`, `drive-wheels_fwd`, `drive-wheels_rwd`), porque no existe un orden real entre tracción delantera, trasera o 4x4 — asignarles 1, 2, 3 le habría metido al modelo una jerarquía falsa.
+   - `aspiration` (*std*, *turbo*) → una sola columna nueva (`aspiration_turbo`), usando `drop_first=True` para no guardar información redundante (si no es turbo, ya se sabe que es estándar).
+
+   Noté dos cosas al comparar con lo que describía la guía: primero, mi versión de `pandas` generó las columnas nuevas como `True`/`False` en vez de `1`/`0` como decía el enunciado — es lo mismo, solo un cambio de cómo se representa el dato en versiones más recientes de la librería. Segundo, `get_dummies` **elimina automáticamente** la columna de texto original después de codificarla (por eso `aspiration` y `drive-wheels` ya no aparecen en la tabla final), mientras que `replace()` conserva la columna original junto a la nueva — son dos comportamientos distintos que hay que tener presentes.
+
+La razón para separar ordinal de no ordinal es que un modelo interpreta los números como números: si le doy un orden falso a una variable que no lo tiene (como decir que *4wd = 1* y *rwd = 3*), el modelo puede "aprender" relaciones que no son reales, solo porque yo elegí ese orden arbitrariamente al codificar.
+
+### Pasos y capturas
+
+> - [Iniciando en la instancia con el Notebook](evidencias/lab3-3/starting.png)
+> - [información sobre `df_car.info()`](evidencias/lab3-3/db_car_info.png).
+> - [Cuatro columnas categóricas antes de codificar (`df_car.head()`)](evidencias/lab3-3/db_car_info.png).
+> - [Codificación ordinal (columnas `doors` y `cylinders` ya numéricas)](evidencias/lab3-3/df_car_head.png)
+> - [codificación no ordinal (columnas `drive-wheels_*` y `aspiration_turbo`)](evidencias/lab3-3/wheels.png)
+> - [Analisis columna final](evidencias/lab3-3/final.png)
+
+### Resultado final de la tarea
+
+> [Resultado Lab 3.3](evidencias/lab3-3/final.png)`
+
+### Commits de esta tarea
+
+- `chore: evidence from lab 3-3` ([``](../../commit/))
+
+---
+
+## 💭 Reflexión final
+
+> - ¿Qué fue lo que más te costó de trabajar en SageMaker comparado con un notebook local?
+> - ¿Qué tan claro te quedó el flujo completo de EDA (cargar → explorar → codificar)?
+> - ¿En qué situación real usarías esto que aprendiste?
+> - ¿Qué harías distinto si tuvieras que repetir el laboratorio?
