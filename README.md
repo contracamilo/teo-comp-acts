@@ -134,13 +134,5 @@ La razón para separar ordinal de no ordinal es que un modelo interpreta los nú
 
 ### Commits de esta tarea
 
-- `chore: evidence from lab 3-3` ([``](../../commit/))
-
----
-
-## 💭 Reflexión final
-
-> - ¿Qué fue lo que más te costó de trabajar en SageMaker comparado con un notebook local?
-> - ¿Qué tan claro te quedó el flujo completo de EDA (cargar → explorar → codificar)?
-> - ¿En qué situación real usarías esto que aprendiste?
-> - ¿Qué harías distinto si tuvieras que repetir el laboratorio?
+- `chore: evidence from lab 3-3` ([`fad56de`](../../commit/fad56de))
+  
