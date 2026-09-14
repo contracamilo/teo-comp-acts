@@ -17,7 +17,7 @@ Este repositorio reúne la evidencia de los tres laboratorios guiados de Amazon 
 
 ## 🔑 Evidencia de acceso a la plataforma de laboratorio
 
-![Acceso a la plataforma](evidencias/lab3-1/acceso-plataforma.png)
+![Acceso a la plataforma](acceso.png)
 
 ---
 
@@ -135,4 +135,14 @@ La razón para separar ordinal de no ordinal es que un modelo interpreta los nú
 ### Commits de esta tarea
 
 - `chore: evidence from lab 3-3` ([`fad56de`](../../commit/fad56de))
+
+---
+
+## 💭 Reflexión final
+
+En los tres labs pusimos experimentar con pythonm y las libs de python Pandas y Scypy, pudimso experimentar el flujo completo de un proyecto de datos: cargar, explorar y codificar, en ese orden, antes de pensar en cualquier modelo. Aprendí a no confiar solo en los números sueltos (una tabla de `describe()` no dice todo) y a distinguir cuándo una variable categórica tiene orden real (para codificarla con un mapeador) y cuándo no (para usar One-Hot Encoding).
+
+De Amazon SageMaker rescato lo cómodo que es no tener que configurar nada: la instancia ya trae JupyterLab, los kernels de conda listos y notebooks de ejemplo cargados automáticamente, y el panel de Git integrado facilita llevar el control de versiones sin salir del navegador. No todo fue perfecto —me topé con un `ModuleNotFoundError` con `scipy` y con diferencias de comportamiento entre la guía y mi versión de pandas—, pero eso también me enseñó a leer los errores en vez de asumir que el código siempre corre igual.
+
+Este tipo de análisis aplica directamente a problemas reales, como el escenario del laboratorio de detectar anomalías ortopédicas: antes de construir cualquier sistema de predicción, hay que entender con evidencia qué variables importan y cuáles no, en vez de suponerlo.
   
